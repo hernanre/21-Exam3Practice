@@ -5,8 +5,8 @@ This problem provides practice at:
   ***  FOR and WHILE loops.  ***
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Ricardo Hernandez.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ########################################################################
 # Students:
@@ -119,7 +119,9 @@ def run_test_practice_problem3():
                                     - math.sqrt(2) - 0.00000000001],
                                    big_list))
 
-    # ------------------------------------------------------------------
+    st.SimpleTestCase(practice_problem3, [200, 10, 2], [1, 1, 1, 1, 1])
+
+    # -----------------------------------------------------------------
     # Run the 14 tests in the   tests   list constructed above.
     # ------------------------------------------------------------------
     st.SimpleTestCase.run_tests('practice_problem3', tests)
@@ -207,8 +209,21 @@ def practice_problem3(start, n, threshold):
       :type n:     int
       :type threshold: float
     """
+    new_seq = []
+    if n == 0:
+        return new_seq
+
+    i = start
+    while True:
+        y = math.sin(i) + math.cos(i)
+        if y > threshold:
+            new_seq = new_seq + [i]
+        if len(new_seq) == n:
+            return new_seq
+        i = i + 1
+
     ####################################################################
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #          Some tests are already written for you (above),
     #          but you are required to write ADDITIONAL tests (above).
     ####################################################################

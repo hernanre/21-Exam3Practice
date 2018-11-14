@@ -5,8 +5,8 @@ This problem provides practice at:
   ***  LOOPS WITHIN LOOPS in 2D GRAPHICS problems.  ***
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Ricardo Hernandez.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ########################################################################
 # Students:
@@ -29,6 +29,7 @@ Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
 ########################################################################
 
 import rosegraphics as rg
+import math
 
 
 def main():
@@ -88,8 +89,58 @@ def hourglass(window, n, point, radius, color):
     where n and radius are positive and color is a string that denotes
     a color that rosegraphics understands.
     """
+
+    x = point.x
+    y = point.y
+    r = radius
+    change = math.sqrt(3) * r
+    for s in range(n):
+        x_center = x - s * r
+        y_center = y - s * change
+        circle = rg.Circle(rg.Point(x_center, y_center), r)
+        circle.fill_color = color
+        circle.attach_to(window)
+
+        line = rg.Line(rg.Point(x_center - r, y_center), rg.Point(x_center + r, y_center))
+        line.color = 'black'
+        line.attach_to(window)
+
+        for j in range(s):
+            moved_x = circle.center.x + (j + 1) * 2 * r
+            moved_circle = rg.Circle(rg.Point(moved_x, y_center), r)
+            moved_circle.fill_color = color
+            moved_circle.attach_to(window)
+
+            line = rg.Line(rg.Point(moved_x - r, y_center), rg.Point(moved_x + r, y_center))
+            line.color = 'black'
+            line.attach_to(window)
+
+    for q in range(n-1):
+        other_x = x - (q + 1) * r
+        other_y = y + (q + 1) * change
+        b_circles = rg.Circle(rg.Point(other_x, other_y), r)
+        b_circles.fill_color = color
+        b_circles.attach_to(window)
+
+        line = rg.Line(rg.Point(other_x - r, other_y), rg.Point(other_x + r, other_y))
+        line.color = 'black'
+        line.attach_to(window)
+
+        for a in range(q+1):
+            a_moved_x = b_circles.center.x + (a + 1) * 2 * b_circles.radius
+            other_b_circles = rg.Circle(rg.Point(a_moved_x, other_y), r)
+            other_b_circles.attach_to(window)
+            other_b_circles.fill_color = color
+
+            line = rg.Line(rg.Point(a_moved_x - r, other_y), rg.Point(a_moved_x + r, other_y))
+            line.color = 'black'
+            line.attach_to(window)
+    window.render()
+
+
+
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #       We provided some tests for you (above).
     # ------------------------------------------------------------------
     ####################################################################
@@ -162,6 +213,7 @@ def many_hourglasses(window, square, m, colors):
     where m is positive and colors is a sequence of strings,
     each of which denotes a color that rosegraphics understands.
     """
+
     # ------------------------------------------------------------------
     # TODO: 3. Implement and test this function.
     #       We provided some tests for you (above).

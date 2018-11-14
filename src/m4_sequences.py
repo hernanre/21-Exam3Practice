@@ -35,9 +35,9 @@ import rosegraphics as rg
 
 def main():
     """ Calls the   TEST   functions in this module. """
-    run_test_practice_problem4a()
-    run_test_practice_problem4b()
-    run_test_practice_problem4c()
+    # run_test_practice_problem4a()
+    # run_test_practice_problem4b()
+    # run_test_practice_problem4c()
     run_test_practice_problem4d()
 
 
@@ -70,7 +70,7 @@ def is_prime(n):
     #   Do NOT copy code from this function.
     #
     # Instead, ** CALL ** this function as needed in the problems below.
-    # ------------------------------------------------------------------
+    # -----------------------------e=e=-------------------------------------
 
 
 # ----------------------------------------------------------------------
@@ -133,8 +133,16 @@ def practice_problem4a(sequence):
     Type hints:
       :type sequence: list | tuple | string
     """
+    new_sequence = []
+    for x in range(0, len(sequence) - 1):
+        if sequence[x] == sequence[x+1]:
+            new_sequence = new_sequence + [x]
+    return new_sequence
+
+
+
     ####################################################################
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     ####################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
@@ -196,8 +204,14 @@ def practice_problem4b(sequence):
     Type hints:
       :type sequence: (list | tuple) of (float | int)
     """
+    x = sequence[0]
+    for k in range(len(sequence)):
+        if k % 2 == 0:
+            if sequence[k] > x:
+                x = sequence[k]
+    return x
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     ####################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
@@ -294,8 +308,29 @@ def practice_problem4c(points):
       :type points: tuple of rg.Point
       :rtype: rg.Point | string
     """
+    # points_seq = []
+    # for j in range(len(points)):
+    #     points_seq = points_seq + [points[j]]
+    #
+    # for k in range(len(points_seq)):
+    #     x = points_seq[k].x
+    #     y = points_seq[k].y
+    #     if is_prime(x) and is_prime(y):
+    #         new_point_x = y
+    #         new_point_y = x
+    #         return rg.Point(new_point_x, new_point_y)
+    # return 'Not found'
+    for k in range(len(points)):
+        x = points[k].x
+        y = points[k].y
+        if is_prime(x) and is_prime(y):
+            points[k].x = y
+            points[k].y = x
+            return points[k]
+    return 'Not found'
+
     ####################################################################
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #     The testing code is already written for you (above).
     #
     # IMPORTANT: This problem is your LOWEST PRIORITY for preparing
@@ -390,8 +425,14 @@ def practice_problem4d(sequence):
       :type sequence: (list | tuple) of int
       :rtype: int
     """
+    total = 0
+    for j in range(0, len(sequence)-1):
+        if is_prime(sequence[j]) and is_prime(sequence[j+1]):
+            if not sequence[j] == sequence[j+1]:
+                total += sequence[j]
+    return total
     ####################################################################
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #     The testing code is already written for you (above).
     ####################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
